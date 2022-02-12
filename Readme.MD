@@ -41,7 +41,7 @@
 
 #### Tips:Cookie有过期时间,只有绿钻的Cookie才能解析绿钻歌曲
 
-<img alt="截图" heig ht="296" src="MD/截图.png" width="512"/></br>
+<img alt="截图" heig ht="296" src="docs/截图.png" width="512"/></br>
 
 # 赞助
 
