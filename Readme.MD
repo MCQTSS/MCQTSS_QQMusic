@@ -41,7 +41,7 @@
 
 #### Tips:Cookie有过期时间,只有绿钻的Cookie才能解析绿钻歌曲
 
-<img alt="截图" heig ht="296" src="https://mcqtssdw.oss-cn-zhangjiakou.aliyuncs.com/MCQTSS_skm/QQ%E6%88%AA%E5%9B%BE20220210234017.png" width="512"/></br>
+<img alt="截图" heig ht="296" src="MD/截图.png" width="512"/></br>
 
 # 赞助
 
@@ -49,8 +49,8 @@
 
 ### 支付宝
 
-<img src="https://mcqtssdw.oss-cn-zhangjiakou.aliyuncs.com/MCQTSS_skm/C7A8DC521B4F0F07C2FFD9E0EB3BE75A.jpg" width="111px" height="165px" alt="支付宝">
+<img src="docs/zfb.jpg" width="111px" height="165px" alt="支付宝">
 
 ### 微信
 
-<img src="https://mcqtssdw.oss-cn-zhangjiakou.aliyuncs.com/MCQTSS_skm/3918962FCB73C64D8C1A782C5EF3A45C.jpg" width="111px" height="157px" alt="微信">
+<img src="docs/wx.jpg" width="111px" height="157px" alt="微信">
