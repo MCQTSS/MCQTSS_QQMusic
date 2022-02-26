@@ -1,7 +1,7 @@
 import Main
 
 QQM = Main.QQ_Music()
-QQM._cookies = QQM.set_cookie('')  # Cookie获取方式readme.md有写
+QQM._cookies = QQM.set_cookie(cookie)  # Cookie获取方式readme.md有写
 list_search = QQM.search_music('周杰伦', 20)
 for i in range(len(list_search)):
     mid = list_search[i]['mid']
@@ -13,8 +13,8 @@ for i in range(len(list_search)):
     print('歌曲名:{} ID:{} Mid:{} 专辑:{} 专辑Mid:{} 歌手:{}'.format(name, music_id, mid, album_name, album_mid, singer))
     print('*' * 50)
 # print(QQM.get_music_info(list_search[0]['id']))  # 通过音乐ID来获取音乐信息(和搜索获取的感觉差不多)
-
 album_info = QQM.get_album_info(list_search[0]['album']['mid'])
+print(album_info)
 print('歌曲{}的专辑信息:\n'
       '专辑名:{} 发行时间:{} 发行公司:{} 专辑语言:{} 专辑类型:{} 专辑类型:{}\n'
       '专辑介绍:{}\n'
@@ -29,3 +29,5 @@ print('歌曲{}的专辑信息:\n'
                            album_info['req_1']['data']['company']['brief']))
 music_url = QQM.get_music_url(list_search[0]['mid'])
 print('音乐播放URL:', music_url)
+print('音乐歌词:\n{}'.format(QQM.get_lyrics(list_search[0]['mid'])))
+print(QQM.get_radio_info())

@@ -1,6 +1,9 @@
+import time
+import base64
 import requests
 import json
 import random
+import re
 
 
 class QQ_Music:
@@ -67,11 +70,11 @@ class QQ_Music:
                          "g_tk_new_20200303": 708550273, "g_tk": 708550273},
                 "req_1": {"module": "music.trackInfo.UniformRuleCtrl", "method": "CgiGetTrackInfo",
                           "param": {"ids": [music_id], "types": [0]}}}
-        url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data))
-        ret = json.loads(requests.get(url, headers=self._headers, cookies=self._cookies).text)
+        ret = json.loads(requests.get(url='https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data)),
+                                      headers=self._headers, cookies=self._cookies).text)
         if ret['code'] == 500001:  # 如果返回500001代表提交的数据有问题
             return 'Error'
-        return ret['req_1']['data']['tracks']  # 直接返回QQ音乐服务器返回的结果,和搜索返回的感觉差不多,直接返回tracks数组
+        return ret['req_1']['data']['tracks']  # 直接返回QQ音乐服务器返回的结果,和搜索返回的感觉差不多,直接返回tracks数组\
 
     def get_album_info(self, album_mid):  # 获取专辑信息
         uin = ''.join(random.sample('1234567890', 10))  # 和音乐的那个一样,uin随机10个数字就行
@@ -80,15 +83,14 @@ class QQ_Music:
                          "g_tk_new_20200303": 708550273, "g_tk": 708550273},
                 "req_1": {"module": "music.musichallAlbum.AlbumInfoServer", "method": "GetAlbumDetail",
                           "param": {"albumMid": album_mid}}}
-        url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data))
-        resp = json.loads(requests.get(url, headers=self._headers, cookies=self._cookies).text)
+        resp = json.loads(requests.get(url='https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data)),
+                                       headers=self._headers, cookies=self._cookies).text)
         if resp['code'] == 500001:  # 如果返回500001代表提交的数据有问题
             return 'Error'
         return resp
 
     def search_music(self, name, limit=20):  # 搜索歌曲,name歌曲名,limit返回数量
-        url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp'
-        params = {
+        return requests.get(url='https://c.y.qq.com/soso/fcgi-bin/client_search_cp', params={
             'w': name,
             't': 0,
             'n': limit,
@@ -97,8 +99,58 @@ class QQ_Music:
             'new_json': 1,
             'format': 'json',
             'platform': 'yqq.json'
-        }
-        resp = requests.get(url, params=params, timeout=1)
-        rv = resp.json()
-        return rv['data']['song']['list']
+        }, timeout=1, headers=self._headers).json()['data']['song']['list']
 
+    def get_playlist_info(self, playlist_id):  # 通过歌单ID获取歌单信息,songList返回的内容和搜索返回的差不多
+        return json.loads(str(re.findall('window.__INITIAL_DATA__ =(.*?)</script>',
+                                         requests.get(url='https://y.qq.com/n/ryqq/playlist/{}'.format(playlist_id),
+                                                      headers=self._headers,
+                                                      cookies=self._cookies).text)[0]).replace('undefined',
+                                                                                               '"undefined"'))
+
+    def get_playlist_info_num(self, playlist_id, song_num):  # 逐个获取歌单ID内容
+        data = {
+            "req_0": {
+                "module": "srf_diss_info.DissInfoServer",
+                "method": "CgiGetDiss",
+                "param": {
+                    "disstid": playlist_id,
+                    "onlysonglist": 1,
+                    "song_begin": song_num,
+                    "song_num": 15
+                }
+            },
+            "comm": {
+                "g_tk": 865217452,
+                "uin": ''.join(random.sample('1234567890', 10)),
+                "format": "json",
+                "platform": "h5"
+            }
+        }
+        resp = json.loads(requests.get(url='https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data)),
+                                       headers=self._headers, cookies=self._cookies).text)
+        if resp['code'] == 500001:  # 如果返回500001代表提交的数据有问题
+            return 'Error'
+        return resp
+
+    def get_recommended_playlist(self):  # 获取QQ音乐推荐歌单,获取内容应该和Cookie有关
+        return json.loads(str(re.findall('window.__INITIAL_DATA__ =(.*?)</script>',
+                                         requests.get(url='https://y.qq.com/n/ryqq/category',
+                                                      headers=self._headers,
+                                                      cookies=self._cookies).text)[0]).replace('undefined',
+                                                                                               '"undefined"'))
+
+    def get_lyrics(self, mid):  # 获取歌曲歌词信息
+        return base64.b64decode(
+            requests.get(url='https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?_={}'
+                             '&format=json&loginUin={}&songmid={}'.format(time.time(),
+                                                                          ''.join(random.sample('1234567890', 10)),
+                                                                          mid),
+                         headers=self._headers, cookies=self._cookies).json()['lyric']).decode('utf-8')
+
+    def get_radio_info(self):  # 获取个性电台信息
+        return json.loads(str(re.findall('window.__INITIAL_DATA__ =(.*?)</script>',
+                                         requests.get(url='https://y.qq.com/n/ryqq/radio',
+                                                      headers=self._headers,
+                                                      cookies=self._cookies).text)[0]).replace('undefined',
+                                                                                               '"undefined"'))
