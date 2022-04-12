@@ -77,13 +77,13 @@
 
 <img alt="截图" heig ht="296" src="docs/截图.png" width="512"/></br>
 
-# 解析或部分操作data的获取方法;
+# 解析或部分操作data的获取方法
 
 #### 下图中画红框的地方就是data的数据,格式json
 
 #### 复制进去后稍微改点东西就行,比如音乐mid之类的
 
-#### 获取完成data数据后直接使用万能提交接口提交即可:
+#### 获取完成data数据后直接使用万能提交接口提交即可
 
 ### https://u.y.qq.com/cgi-bin/musicu.fcg?data=抓到的data数据
 
