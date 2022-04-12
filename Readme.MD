@@ -24,6 +24,8 @@
 
 ### 写的其他解析:[酷狗音乐解析](https://github.com/MCQTSS/KuGouMusic)
 
+### 这个的B站专栏:[点我打开](https://www.bilibili.com/read/cv15833876)
+
 ### 闲的没事更新了下,加了点功能
 
 # 包含文件&使用的第三方库&Python版本
@@ -74,6 +76,20 @@
 #### Tips:Cookie有过期时间,只有绿钻的Cookie才能解析绿钻歌曲
 
 <img alt="截图" heig ht="296" src="docs/截图.png" width="512"/></br>
+
+# 解析或部分操作data的获取方法;
+
+#### 下图中画红框的地方就是data的数据,格式json
+
+#### 复制进去后稍微改点东西就行,比如音乐mid之类的
+
+#### 获取完成data数据后直接使用万能提交接口提交即可:
+
+### https://u.y.qq.com/cgi-bin/musicu.fcg?data=抓到的data数据
+
+<img alt="截图" heig ht="296" src="docs/data获取方法.png" width="512"/></br>
+
+#### 至于剩下的基本都是直接获取他的html然后正则匹配网页中的json了
 
 # 赞助
 
