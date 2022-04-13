@@ -97,6 +97,20 @@
 
 #### 至于剩下的基本都是直接获取他的html然后正则匹配网页中的json了
 
+# 机器人
+
+### 机器人QQ:2910945342
+
+### 拉群后发送/help获取使用方法,目前支持:
+
+#### 搜索音乐
+
+#### 获取歌词
+
+#### 获取MV
+
+#### 查原神,(使用了[YuanShen_User_Info](https://github.com/Womsxd/YuanShen_User_Info))
+
 # 赞助
 
 ### [爱发电](https://afdian.net/@mcqtss)
