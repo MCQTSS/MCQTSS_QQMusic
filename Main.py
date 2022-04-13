@@ -160,6 +160,21 @@ class QQ_Music:
 			requests.get(url='https://i.y.qq.com/n2/m/share/details/toplist.html?ADTAG=ryqq.toplist&type=0&id=4',
 			             headers=self.headers).text)[0])
 
+	def get_mv_url(self, vid):  # 获取MV信息,下载地址
+		data = {"comm": {"ct": 6, "cv": 0, "g_tk": 1366999994, "uin": ''.join(random.sample('1234567890', 10)),
+		                 "format": "json", "platform": "yqq"},
+		        "mvInfo": {"module": "video.VideoDataServer", "method": "get_video_info_batch",
+		                   "param": {"vidlist": [vid],
+		                             "required": ["vid", "type", "sid", "cover_pic", "duration", "singers",
+		                                          "new_switch_str", "video_pay", "hint", "code", "msg", "name", "desc",
+		                                          "playcnt", "pubdate", "isfav", "fileid", "filesize", "pay",
+		                                          "pay_info", "uploader_headurl", "uploader_nick", "uploader_uin",
+		                                          "uploader_encuin"]}},
+		        "mvUrl": {"module": "music.stream.MvUrlProxy", "method": "GetMvUrls",
+		                  "param": {"vids": [vid], "request_type": 10003, "addrtype": 3, "format": 264}}}
+		return requests.post(url='https://u.y.qq.com/cgi-bin/musicu.fcg', data=json.dumps(data), timeout=1,
+		                     headers=self._headers).json()
+
 	@property
 	def headers(self):
 		return self._headers
