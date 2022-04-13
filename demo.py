@@ -10,7 +10,10 @@ for i in range(len(list_search)):
     album_mid = list_search[i]['album']['mid']
     album_name = list_search[i]['album']['name']
     singer = list_search[i]['singer'][0]['name']
-    print('歌曲名:{} ID:{} Mid:{} 专辑:{} 专辑Mid:{} 歌手:{}'.format(name, music_id, mid, album_name, album_mid, singer))
+    vid = list_search[i]['mv']['vid']
+	print(
+		'歌曲名:{} ID:{} Mid:{} 专辑:{} 专辑Mid:{} 歌手:{} 歌曲MVVid:{}'.format(name, music_id, mid, album_name, album_mid, singer,
+		                                                             vid))
     print('*' * 50)
 # print(QQM.get_music_info(list_search[0]['id']))  # 通过音乐ID来获取音乐信息(和搜索获取的感觉差不多)
 album_info = QQM.get_album_info(list_search[0]['album']['mid'])
