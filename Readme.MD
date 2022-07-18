@@ -97,7 +97,19 @@
 
 #### 至于剩下的基本都是直接获取他的html然后正则匹配网页中的json了
 
-# 机器人(号没了,暂时别用了)
+# MCQTSS Music
+
+### 下载方式:[releases](https://github.com/MCQTSS/MCQTSS_QQMusic/releases)中选择最新一个下载
+
+### 使用本项目做成服务端,客户端数据发送到服务端解析并获取音乐信息播放URL之类的
+
+### 使用易语言编写,播放模块使用的[BASS音频模块(Bass.dll)](http://www.un4seen.com/)
+
+### 支持播放绿钻歌曲和周杰伦最新专辑(实际能不能播放看我服务器Cookie有无过期)
+
+<img src="docs/Music.png" width="300" height="460" alt="微信">
+
+# 机器人
 
 ### 机器人QQ:2910945342
 
