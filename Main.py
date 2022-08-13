@@ -4,6 +4,8 @@ import requests
 import json
 import random
 import re
+import math
+import hashlib
 
 
 class QQ_Music:
@@ -24,7 +26,20 @@ class QQ_Music:
 		for i in range(len(cookie_list)):
 			list_1 = cookie_list[i].split('=')  # 分割等于后面的值
 			list_ret[list_1[0]] = list_1[1]  # 加入字典
+			if len(list_1) == 3:
+				list_ret[list_1[0]] = list_1[1] + '=' + list_1[2]
 		return list_ret
+
+	def get_sign(self, data):  # QQMusic_Sign算法
+		st = 'abcdefghijklmnopqrstuvwxyz0123456789'
+		count = (math.floor(random.randint(10, 16)))
+		sign = 'zzb'
+		for i in range(count):
+			sign += st[math.floor(random.randint(0, 35))]
+		s = 'CJBPACrRuNy7' + data
+		s_md5 = hashlib.md5(s.encode('utf-8')).hexdigest()
+		sign += s_md5
+		return sign
 
 	def get_music_url(self, music_mid):  # 通过Mid获取音乐播放URL
 		uin = ''.join(random.sample('1234567890', 10))  # UIN基本不校验,长度10就行,如果请求正常这是你的QQ号
@@ -90,16 +105,11 @@ class QQ_Music:
 		return resp
 
 	def search_music(self, name, limit=20):  # 搜索歌曲,name歌曲名,limit返回数量
-		return requests.get(url='https://c.y.qq.com/soso/fcgi-bin/client_search_cp', params={
-			'w': name,
-			't': 0,
-			'n': limit,
-			'page': 1,
-			'cr': 1,
-			'new_json': 1,
-			'format': 'json',
-			'platform': 'yqq.json'
-		}, timeout=1, headers=self._headers).json()['data']['song']['list']
+		return requests.get(url='https://shc.y.qq.com/soso/fcgi-bin/search_for_qq_cp?_=1657641526460&g_tk'
+		                        '=1037878909&uin=1804681355&format=json&inCharset=utf-8&outCharset=utf-8&notice=0'
+		                        '&platform=h5&needNewCode=1&w={}&zhidaqu=1&catZhida=1&t=0&flag=1&ie=utf-8&sem=1'
+		                        '&aggr=0&perpage={}&n={}&p=1&remoteplace=txt.mqq.all'.format(name, limit, limit),
+		                    headers=self._headers).json()['data']['song']['list']
 
 	def get_playlist_info(self, playlist_id):  # 通过歌单ID获取歌单信息,songList返回的内容和搜索返回的差不多
 		return json.loads(str(re.findall('window.__INITIAL_DATA__ =(.*?)</script>',
@@ -172,8 +182,21 @@ class QQ_Music:
 		                                          "uploader_encuin"]}},
 		        "mvUrl": {"module": "music.stream.MvUrlProxy", "method": "GetMvUrls",
 		                  "param": {"vids": [vid], "request_type": 10003, "addrtype": 3, "format": 264}}}
+		print(json.dumps(data))
 		return requests.post(url='https://u.y.qq.com/cgi-bin/musicu.fcg', data=json.dumps(data), timeout=1,
 		                     headers=self._headers).json()
+
+	def get_singer_album_info(self, mid):
+		uin = ''.join(random.sample('1234567890', 10))  # 和音乐的那个一样,uin随机10个数字就行
+		data = {"req_0": {"module": "music.homepage.HomepageSrv", "method": "GetHomepageTabDetail",
+		                  "param": {"uin": uin, "singerMid": mid, "tabId": "album", "page": 0,
+		                            "pageSize": 10, "order": 0}},
+		        "comm": {"g_tk": 1666686892, "uin": int(uin), "format": "json", "platform": "h5", "ct": 23}}
+		resp = requests.get(url='https://u.y.qq.com/cgi-bin/musicu.fcg?data={}'.format(json.dumps(data)),
+		                    headers=self._headers, cookies=self._cookies).json()
+		if resp['code'] == 500001:  # 如果返回500001代表提交的数据有问题
+			return 'Error'
+		return resp['req_0']['data']['list']
 
 	@property
 	def headers(self):
