@@ -34,19 +34,21 @@
 
 # 包含文件&使用的第三方库&Python版本
 
-| 文件名             | 作用                      |
-|:----------------|:------------------------|
-| Readme.MD       | 说明                      |
-| Main.py         | 主程序                     |
-| demo.py         | 使用方法-搜索,获取音乐下载地址,获取专辑信息 |
-| demo_1.py       | 使用方法-解析全部歌单(随便写的)       |
-| demo_toplist.py | 使用方法-流行指数榜单获取           |
-| demo_mv.py      | 使用方法-获取MV下载地址以及信息       |
+| 文件名                              | 作用                      |
+|:---------------------------------|:------------------------|
+| Readme.MD                        | 说明                      |
+| Main.py                          | 主程序                     |
+| demo.py                          | 使用方法-搜索,获取音乐下载地址,获取专辑信息 |
+| demo_1.py                        | 使用方法-解析全部歌单(随便写的)       |
+| demo_toplist.py                  | 使用方法-流行指数榜单获取           |
+| demo_mv.py                       | 使用方法-获取MV下载地址以及信息       |
+| search_music_new/search_music.py | 搜索音乐(较新方法)              |
 
-| 名称       | 版本     |
-|:---------|:-------|
-| Python   | 3.9    |
-| requests | 2.27.1 |
+| 名称       | 版本     | 额外说明                                      |
+|:---------|:-------|-------------------------------------------|
+| Python   | 3.9    |                                           |
+| requests | 2.27.1 | 请求模块                                      |
+| pyexecjs | 1.5.1  | 不使用search_music_new里的不需要安装,用来运行JavaScript |
 
 # 函数&类作用
 
@@ -68,6 +70,14 @@
 | get_radio_info           | 获取个性电台信息,获取内容应该和Cookie有关              | 无,设置好Cookie就行                                                                     |
 | get_toplist_music        | 获取QQ流行歌曲榜单信息                          | 无,目前cookie也不需要提交所有人都一样                                                            |
 | get_mv_url               | 获取MV下载地址,信息                           | vid:MV的VID,搜索时获取(demo.py已更新写法)                                                    |
+
+# 额外说明
+
+#### 在最新的更新中增加了search_music_new/search_music.py
+
+#### 这是比较新的QQ音乐搜索方法,searchid这玩意其实最后发现填不填都行,但我还是看了下QQ音乐的js并搞了出来
+
+#### QQ音乐已和谐之前手机搜索接口c.y.qq.com/soso/fcgi-bin/search_for_qq_cp
 
 # 如何获取Cookie
 
@@ -108,20 +118,6 @@
 ### 支持播放绿钻歌曲和周杰伦最新专辑(实际能不能播放看我服务器Cookie有无过期)
 
 <img src="docs/Music.png" width="300" height="460" alt="微信">
-
-# 机器人
-
-### 机器人QQ:2910945342
-
-### 拉群后发送/help获取使用方法,目前支持:
-
-#### 搜索音乐
-
-#### 获取歌词
-
-#### 获取MV
-
-#### 查原神,(使用了[YuanShen_User_Info](https://github.com/Womsxd/YuanShen_User_Info))
 
 # 赞助
 
