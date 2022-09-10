@@ -107,7 +107,7 @@
 
 #### 至于剩下的基本都是直接获取他的html然后正则匹配网页中的json了
 
-# MCQTSS Music
+# MCQTSS Music(云解析服务已关,可能无法解析绿钻)
 
 ### 下载方式:[releases](https://github.com/MCQTSS/MCQTSS_QQMusic/releases)中选择最新一个下载
 
