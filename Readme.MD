@@ -122,11 +122,3 @@
 # 赞助
 
 ### [爱发电](https://afdian.net/@mcqtss)
-
-### 支付宝
-
-<img src="docs/zfb.jpg" width="111px" height="165px" alt="支付宝">
-
-### 微信
-
-<img src="docs/wx.jpg" width="111px" height="157px" alt="微信">
