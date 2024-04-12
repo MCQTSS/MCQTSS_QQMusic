@@ -1,6 +1,8 @@
 # QQ音乐解析
 
-## CodeBy MCQTSS
+### CodeBy MCQTSS
+
+## **注意!!可能只有Demo.py中的功能可能正常使用,修复可能没全部修复完**
 
 ### 支持功能:
 
@@ -34,21 +36,22 @@
 
 # 包含文件&使用的第三方库&Python版本
 
-| 文件名                              | 作用                      |
-|:---------------------------------|:------------------------|
-| Readme.MD                        | 说明                      |
-| Main.py                          | 主程序                     |
-| demo.py                          | 使用方法-搜索,获取音乐下载地址,获取专辑信息 |
-| demo_1.py                        | 使用方法-解析全部歌单(随便写的)       |
-| demo_toplist.py                  | 使用方法-流行指数榜单获取           |
-| demo_mv.py                       | 使用方法-获取MV下载地址以及信息       |
-| search_music_new/search_music.py | 搜索音乐(较新方法)              |
+| 文件名             | 作用                       |
+|:----------------|:-------------------------|
+| Readme.MD       | 说明                       |
+| Main.py         | 主程序                      |
+| demo.py         | 使用方法-搜索,获取音乐下载地址,获取专辑信息  |
+| demo_1.py       | 使用方法-解析全部歌单(可能不可用)       |
+| demo_toplist.py | 使用方法-流行指数榜单获取(可能不可用)     |
+| demo_mv.py      | 使用方法-获取MV下载地址以及信息(可能不可用) | 
+| main.js         | QQ音乐Sign算法JavaScript加载器  |
+| ventor.js       | QQ音乐Sign算法JavaScript     |
 
-| 名称       | 版本     | 额外说明                                      |
-|:---------|:-------|-------------------------------------------|
-| Python   | 3.9    |                                           |
-| requests | 2.27.1 | 请求模块                                      |
-| pyexecjs | 1.5.1  | 不使用search_music_new里的不需要安装,用来运行JavaScript |
+| 名称       | 版本     | 额外说明                    |
+|:---------|:-------|-------------------------|
+| Python   | 3.10   |                         |
+| requests | 2.31.0 | 请求模块                    |
+| pyexecjs | 1.5.1  | 用于运行JavaScript代码来获取Sign |
 
 # 函数&类作用
 
@@ -73,11 +76,7 @@
 
 # 额外说明
 
-#### 在最新的更新中增加了search_music_new/search_music.py
-
-#### 这是比较新的QQ音乐搜索方法,searchid这玩意其实最后发现填不填都行,但我还是看了下QQ音乐的js并搞了出来
-
-#### QQ音乐已和谐之前手机搜索接口c.y.qq.com/soso/fcgi-bin/search_for_qq_cp
+#### 由于QQ音乐更新了算法导致老版本接口无法使用,最新版Sign本人无力逆向出python版本,目前使用调用JavaScript代码的方式来实现Sign获取
 
 # 如何获取Cookie
 
@@ -93,25 +92,29 @@
 
 <img alt="截图" heig ht="296" src="docs/截图.png" width="512"/></br>
 
-# 解析或部分操作data的获取方法
+# ~~解析或部分操作data的获取方法~~(已失效)
 
-#### 下图中画红框的地方就是data的数据,格式json
+#### ~~下图中画红框的地方就是data的数据,格式json~~
 
-#### 复制进去后稍微改点东西就行,比如音乐mid之类的
+#### ~~复制进去后稍微改点东西就行,比如音乐mid之类的~~
 
-#### 获取完成data数据后直接使用万能提交接口提交即可
+#### ~~获取完成data数据后直接使用万能提交接口提交即可~~
 
-### https://u.y.qq.com/cgi-bin/musicu.fcg?data=抓到的data数据
+### ~~https://u.y.qq.com/cgi-bin/musicu.fcg?data=抓到的data数据~~
 
 <img alt="截图" heig ht="296" src="docs/data获取方法.png" width="512"/></br>
 
 #### 至于剩下的基本都是直接获取他的html然后正则匹配网页中的json了
 
-# [MCQTSSMusic](https://github.com/MCQTSS/MCQTSSMusic)
+# ~~MCQTSS Music(等待复活)~~
 
-### 下载方式已移步[MCQTSSMusic](https://github.com/MCQTSS/MCQTSSMusic),请在release中选择最新一个下载
+### 下载方式:[releases](https://github.com/MCQTSS/MCQTSS_QQMusic/releases)中选择最新一个下载
 
-### 使用python编写
+### 使用本项目做成服务端,客户端数据发送到服务端解析并获取音乐信息播放URL之类的
+
+### 使用易语言编写,播放模块使用的[BASS音频模块(Bass.dll)](http://www.un4seen.com/)
+
+### 支持播放绿钻歌曲和周杰伦最新专辑(实际能不能播放看我服务器Cookie有无过期)
 
 <img src="docs/Music.png" width="300" height="460" alt="微信">
 
